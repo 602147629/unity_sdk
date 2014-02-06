@@ -21,7 +21,8 @@ public class AdjustIoPostprocessBuildPlayer : MonoBehaviour {
 		Process proc = new Process();
 		proc.EnableRaisingEvents=false; 
 		proc.StartInfo.FileName = Application.dataPath + "/AdjustIo/Data/PostBuildScripts/PostBuildAdjustIoScript";
-		proc.StartInfo.Arguments = "'" + pathToBuiltProject + "'";
+		//detect here if they want to use the idfa 1 is using, zero is not using
+		proc.StartInfo.Arguments = "'" + pathToBuiltProject + "' " + EditorPrefs.GetString("AdjustIOUseIDFA","1");
 		proc.Start();
 		proc.WaitForExit();
 		UnityEngine.Debug.Log("AdjustIo build log file: " + System.IO.Directory.GetCurrentDirectory() + "/AdjustIoBuildLogFile.txt");
@@ -51,6 +52,39 @@ public class AdjustIoPostprocessBuildPlayer : MonoBehaviour {
 			}
 		#else
 			EditorUtility.DisplayDialog("AdjustIo", "Please change the platform to Android if you want to this test.", "OK");
+		#endif
+	}
+	
+	[MenuItem ("AdjustIo/Enable IDFA (currently disabled)")]
+	static void EnableIDFA(){
+		#if UNITY_IPHONE
+			EditorPrefs.SetString("AdjustIOUseIDFA","1");
+		#endif
+	}
+	
+	[MenuItem ("AdjustIo/Enable IDFA (currently disabled)", true)]
+	static bool EnableIDFACheck(){
+		#if UNITY_IPHONE
+			return EditorPrefs.GetString("AdjustIOUseIDFA","1") == "0";
+		#else
+			return false;
+		#endif
+		
+	}
+	
+	[MenuItem ("AdjustIo/Disable IDFA (currently enabled)")]
+	static void DisableIDFA(){
+		#if UNITY_IPHONE
+			EditorPrefs.SetString("AdjustIOUseIDFA","0");
+		#endif
+	}
+	
+	[MenuItem ("AdjustIo/Disable IDFA (currently enabled)", true)]
+	static bool DisableIDFACheck(){
+		#if UNITY_IPHONE
+			return EditorPrefs.GetString("AdjustIOUseIDFA","1") == "1";
+		#else
+			return false;
 		#endif
 	}
 }

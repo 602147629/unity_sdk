@@ -35,7 +35,7 @@ chomp $iPhonePath;
 
 
 # AdjustIoRunner.py will add the necessary libraries to the xcode project
-`python2.6 \'$currDir/Assets/AdjustIo/Data/PostbuildScripts/AdjustIoRunner.py\' \'$installPath\' \'$currDir/Assets/AdjustIo/Data/\' \'$iPhonePath\' `;
+`python2.6 \'$currDir/Assets/AdjustIo/Data/PostbuildScripts/AdjustIoRunner.py\' \'$installPath\' \'$currDir/Assets/AdjustIo/Data/\' \'$iPhonePath\' $ARGV[1]`;
 
 open(LOGFILE, ">>AdjustIoBuildLogFile.txt");
 print LOGFILE "python script done\n";

@@ -34,6 +34,16 @@ f.write('project loaded:\n')
 f.close()
 
 f = open('AdjustIoBuildLogFile.txt','a')
+f.write('using IDFA:' + sys.argv[4] + '\n')
+f.close()
+
+if sys.argv[4] == '0' :
+	project.add_other_cflags('-DADJUST_NO_IDFA')
+	f = open('AdjustIoBuildLogFile.txt','a')
+	f.write('c flag set -DADJUST_NO_IDFA:\n')
+	f.close()
+
+f = open('AdjustIoBuildLogFile.txt','a')
 f.write('Starting to copy AdjustIO SDK\n')
 f.close()
 
@@ -58,19 +68,19 @@ for root, dirs, files in os.walk(projectPath + '/Classes/AdjustIo'):
 			if pbxfile.get('isa') == 'PBXBuildFile':
 				pbxfile.add_compiler_flag('-fobjc-arc')
 
+
 f = open('AdjustIoBuildLogFile.txt','a')
 f.write('Files added to project\n')
 f.close()
 
-f = open('AdjustIoBuildLogFile.txt','a')
-f.write('Adding adSupport framework\n')
-f.close()
-
-project.add_file_if_doesnt_exist(XcodeFrameworksPath + 'AdSupport.framework', tree='SDKROOT',create_build_files=True,weak=True);
-
-f = open('AdjustIoBuildLogFile.txt','a')
-f.write('Support framework added\n')
-f.close()
+if sys.argv[4] == '1' :
+	f = open('AdjustIoBuildLogFile.txt','a')
+	f.write('Adding adSupport framework\n')
+	f.close()
+	project.add_file_if_doesnt_exist(XcodeFrameworksPath + 'AdSupport.framework', tree='SDKROOT',create_build_files=True,weak=True);
+	f = open('AdjustIoBuildLogFile.txt','a')
+	f.write('Support framework added\n')
+	f.close()
 
 
 project.saveFormat3_2()

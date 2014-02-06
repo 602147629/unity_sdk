@@ -134,14 +134,24 @@ parameters.Add("foo","bar");
 AdjustIo.TrackRevenue(1.0, "abc123", parameters);
 </code></pre>
 
-[import]: http://github.com/adeven/adjust_sdk/master/Resources/unity/UnityImport.png
-[settings]: http://github.com/adeven/adjust_sdk/master/Resources/unity/AdjustIoSettings.png
-[adjust.io]: http://adjust.io
-[dashboard]: http://adjust.io
-[releases]: https://github.com/adeven/adjust_unity_sdk/releases
-[permissions]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityPermissions.png
-[receiver]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityReceiver.png
-[metadata] : http://github.com/adeven/adjust_sdk/master/Resources/unity/UnityMetaData.png
+## Remove IDFA support
+
+If your app got rejected by Apple because your app is using the advertising
+identifier, this document is for you.
+
+1. Contact us at [support@adjust.io](mailto:support@adjust.io). We would like
+   to make sure that you are aware of the consequences of removing IDFA
+   support.
+
+2. After you talked with us, or when you just can't wait any longer, proceed
+   with the following steps to remove the IDFA support.
+
+### Disable the IDFA support
+
+- In the top menu of the Unity Editor you should find the menu AdjustIo. In this menu you can enable or disable the IDFA support. You must check if this is set correctly before building to Xcode.
+
+- It is not guaranteed that this will work if you are doing an append build (instead of a replace build). When doing an apppend build please follow [these](https://github.com/adeven/adjust_ios_sdk/blob/master/doc/idfa.md) steps.
+
 ## License
 
 The file mod_pbxproj.py is licensed under the Apache License, Version 2.0 (the "License");
@@ -170,3 +180,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+[import]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityImport.png
+[settings]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/AdjustIoSettings.png
+[adjust.io]: http://adjust.io
+[dashboard]: http://adjust.io
+[releases]: https://github.com/adeven/adjust_unity_sdk/releases
+[permissions]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityPermissions.png
+[receiver]: https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityReceiver.png
+[metadata] : https://raw.github.com/adeven/adjust_sdk/master/Resources/unity/UnityMetaData.png
